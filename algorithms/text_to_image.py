@@ -42,12 +42,13 @@ def text_to_image(text):
     for i in range(len(ascii_groups)):
         x = i % MAX_WIDTH
         y = i // MAX_WIDTH
-        r = ascii_groups[i][0] << 16
-        g = ascii_groups[i][1] << 8
-        b = ascii_groups[i][2]
+        r = ascii_groups[i][0]  #mantain red
+        g = ascii_groups[i][1] << 8 #move to green
+        b = ascii_groups[i][2] << 16 #move to blue
         pixels[x, y] = (r + g + b,)
 
     # Saves the image as a PNG file
     filename='text_image.png'
     img.save(filename, 'PNG')
     return filename
+

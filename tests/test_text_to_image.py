@@ -19,6 +19,7 @@ class TextToImageTestCase(TestCase):
         expected_pixels[0, 0] = (69, 117,32) #"Eu "
         expected_pixels[1, 0] = (84, 101, 32) #"Te "
         expected_pixels[2, 0] = (65, 109, 111) #"Amo"
+
         expected_pixels[3, 0] = (255, 255, 255) #white space test
         
         expected_img.save(expected_filename, 'PNG')

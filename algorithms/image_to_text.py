@@ -13,7 +13,6 @@ def image_to_text(image_path):
         A text string extracted from image.
         
     """
-def image_to_text(image_path):
     # Open the image
     img = Image.open(image_path)
 
@@ -26,7 +25,7 @@ def image_to_text(image_path):
     ignore_gb = False 
     for y in range(img.height):
         for x in range(img.width):
-            b, g, r = pixels[x, y]
+            r, g, b = pixels[x, y]
             if ignore_gb and g == 255 and b == 255: # Check if G and B should be ignored
                 continue
             if (ignore_next_blue and b == 255): #fix blue
@@ -46,6 +45,3 @@ def image_to_text(image_path):
     text = ascii_str.replace('\\n', '\n')
     
     return text
-    
-
-    return
