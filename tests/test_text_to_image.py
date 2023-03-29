@@ -12,14 +12,13 @@ class TextToImageTestCase(TestCase):
 
         actual_filename =  text_to_image(text)
 
-        expected_filename = "expected.png"
+        expected_filename = "tests/img/expected.png"
         expected_img = Image.new('RGB', (4, 1), color = 'white')
 
         expected_pixels = expected_img.load()
         expected_pixels[0, 0] = (69, 117,32) #"Eu "
         expected_pixels[1, 0] = (84, 101, 32) #"Te "
         expected_pixels[2, 0] = (65, 109, 111) #"Amo"
-
         expected_pixels[3, 0] = (255, 255, 255) #white space test
         
         expected_img.save(expected_filename, 'PNG')

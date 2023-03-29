@@ -48,7 +48,7 @@ def text_to_image(text):
         pixels[x, y] = (r + g + b,)
 
     # Saves the image as a PNG file
-    filename='text_image.png'
+    filename='tests/img/text_image.png'
     img.save(filename, 'PNG')
     return filename
 
