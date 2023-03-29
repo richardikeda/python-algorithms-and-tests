@@ -9,8 +9,8 @@ class TextToImageTestCase(TestCase):
     def test_text_to_image(self):
         # Tests if the text_to_image function correctly generates an image with one row of length 4
         text = "Eu Te Amo"
-        image = text_to_image(text)
-        actual_filename = "text_image.png"
+
+        actual_filename =  text_to_image(text)
 
         expected_filename = "expected.png"
         expected_img = Image.new('RGB', (4, 1), color = 'white')
