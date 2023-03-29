@@ -9,7 +9,6 @@ algorithms/: A directory containing various Python algorithms for practice and s
     Here is an example of the generated image:
     
      [<img src="doc/sample-max.png" alt="Sample"  height="80">](doc/sample-max.png)
-    ![Sample](doc/sample-max.png)
 
 * image_to_text.py: A Python script that reads an image file and converts it back to the original text message.
 

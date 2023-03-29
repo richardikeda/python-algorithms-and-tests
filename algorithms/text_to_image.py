@@ -44,11 +44,17 @@ def text_to_image(text):
     # Split the list of ASCII values into groups of 3 characters.
     pixels = img.load()
     for i in range(len(ascii_groups)):
-        x = i % MAX_WIDTH
-        y = i // MAX_WIDTH
-        r = ascii_groups[i][0]  #mantain red
-        g = ascii_groups[i][1] << 8 #move to green
-        b = ascii_groups[i][2] << 16 #move to blue
+        try:
+            x = i % MAX_WIDTH
+            y = i // MAX_WIDTH
+            r = ascii_groups[i][0]  #mantain red
+            g = ascii_groups[i][1] << 8 #move to green
+            b = ascii_groups[i][2] << 16 #move to blue
+        except IndexError:
+            ascii_groups[i] += [255]
+            r = ascii_groups[i][0]  #mantain red
+            g = ascii_groups[i][1] << 8 #move to green
+            b = ascii_groups[i][2] << 16 #move to blue
         pixels[x, y] = (r + g + b,)
 
     # Saves the image as a PNG file
