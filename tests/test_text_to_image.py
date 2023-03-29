@@ -4,14 +4,13 @@ from unittest import TestCase
 
 from algorithms.text_to_image import text_to_image
 
-
 class TextToImageTestCase(TestCase):
 
     def test_text_to_image(self):
         # Tests if the text_to_image function correctly generates an image with one row of length 4
         text = "Eu Te Amo"
         text_to_image(text)
-        actual_filename = "text_image.PNG"
+        actual_filename = "text_image.png"
 
         expected_filename = "expected.png"
         expected_img = Image.new('RGB', (4, 1), color = 'white')
