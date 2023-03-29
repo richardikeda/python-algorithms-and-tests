@@ -130,4 +130,5 @@ dmypy.json
 
 # ignore image test
 /tests/img/*
+!/tests/img/.gitkeep
 
