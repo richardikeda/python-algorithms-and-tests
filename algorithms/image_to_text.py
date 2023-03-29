@@ -1,3 +1,5 @@
+from PIL import Image
+
 
 def image_to_text(image_path):
     """

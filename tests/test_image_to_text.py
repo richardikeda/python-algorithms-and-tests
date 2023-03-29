@@ -1,8 +1,20 @@
+import unittest
+from PIL import Image
 from algorithms.image_to_text import image_to_text
 
-# This test is for the image_to_text function in algorithms/image_to_text.py.
-# The function takes an image file path and converts the text in the image to a string.
-# In this test, an image file containing the text is passed to the function, and the resulting string is printed.
-image_file_path = "test_image.png"
-resulting_text = image_to_text(image_file_path)
-print(resulting_text)
+class ImageToTextTestCase(unittest.TestCase):
+
+    def test_image_to_text(self):
+        # Load an image containing text
+        image_path = "text_image.png"
+
+        # Convert the image to text using image_to_text function
+        expected_text = "Eu Te Amo"
+
+        actual_text = image_to_text(image_path)
+
+        # Assert that the converted text is the same as the expected text
+        self.assertEqual(expected_text, actual_text)
+
+if __name__ == '__main__':
+    unittest.main()
