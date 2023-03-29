@@ -19,25 +19,28 @@ def text_to_image(text):
     # Converts the text into a list of ASCII values
     ascii_list = [ord(c) for c in text]
 
+    # Divide a lista de valores ASCII em grupos de 3 caracteres
+    ascii_groups = [ascii_list[i:i+3] for i in range(0, len(ascii_list), 3)]
+
     # Calculates the number of pixel rows needed
-    num_lines = len(ascii_list) // MAX_WIDTH + 1
+    num_lines = len(ascii_groups) // MAX_WIDTH + 1
 
     # Creates an empty image with the appropriate dimensions
     img = Image.new('RGB', (MAX_WIDTH, num_lines), color = 'white')
 
-    # Fills the pixels with colors corresponding to the ASCII values
+    # Split the list of ASCII values into groups of 3 characters.
+
     pixels = img.load()
-    for i in range(len(ascii_list)):
+    for i in range(len(ascii_groups)):
         x = i % MAX_WIDTH
         y = i // MAX_WIDTH
-        r = ascii_list[i]
-        #fix the ideia is made division for g and b
-        g = 0 
-        b = 0
-        pixels[x, y] = (r, g, b)
+        r = ascii_groups[i][0] << 16
+        g = ascii_groups[i][1] << 8
+        b = ascii_groups[i][2]
+        pixels[x, y] = (r + g + b,)
 
     
     # Saves the image as a PNG file
     filename='text_image.png'
     img.save(filename, 'PNG')
-    return 
+    return img
