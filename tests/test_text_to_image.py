@@ -1,8 +1,30 @@
+import unittest
+from PIL import Image
+from unittest import TestCase
+
 from algorithms.text_to_image import text_to_image
 
-# This test is for the text_to_image function in algorithms/text_to_image.py.
-# The function takes a text string and converts it into an image with the specified width and height. 
-# In this test, the text "Eu Te Amo" is passed to the function, and the resulting image has a width of 4 pixels and a height of 1 pixel. 
-# The last pixel of the image is set to the color white (RGB(255,255,255)).
-text = "Eu Te Amo"
-text_to_image(text)
+
+class TextToImageTestCase(TestCase):
+
+    def test_text_to_image(self):
+        # Tests if the text_to_image function correctly generates an image with one row of length 4
+        text = "Eu Te Amo"
+        text_to_image(text)
+        actual_filename = "text_image.PNG"
+
+        expected_filename = "expected.png"
+        expected_img = Image.new('RGB', (4, 1), color = 'white')
+        expected_pixels = expected_img.load()
+        expected_pixels[3, 0] = (255, 255, 255)
+        
+        expected_img.save(expected_filename, 'PNG')
+        
+        with open(expected_filename, 'rb') as expected_file:
+            expected_bytes = expected_file.read()
+        with open(actual_filename, 'rb') as actual_file:
+            actual_bytes = actual_file.read()
+        self.assertEqual(expected_bytes, actual_bytes)
+
+if __name__ == '__main__':
+    unittest.main()
