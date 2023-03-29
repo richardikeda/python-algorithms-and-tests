@@ -8,8 +8,8 @@ algorithms/: A directory containing various Python algorithms for practice and s
  * text_to_image.py: A Python script that converts a text message into an image file. For example, calling the function with the message "Eu Te Amo" will generate a 4-pixel image. The first three pixels contain the text, and the last pixel marks the end of the message. 
     Here is an example of the generated image:
     
-    <img src="doc/sample.png" alt="Sample"  height="80">
-
+     [<img src="doc/sample-max.png" alt="Sample"  height="80">](doc/sample-max.png)
+    ![Sample](doc/sample-max.png)
 
 * image_to_text.py: A Python script that reads an image file and converts it back to the original text message.
 

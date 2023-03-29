@@ -21,6 +21,10 @@ def text_to_image(text):
     # Converts the text into a list of ASCII values
     ascii_list = [ord(c) for c in text]
 
+    # Ensures ascii_list has a length that is a multiple of 3
+    while len(ascii_list) % 3 != 0:
+        ascii_list.append(255)
+
     # Split the list of ASCII values into groups of 3 characters.
     ascii_groups = [ascii_list[i:i+3] for i in range(0, len(ascii_list), 3)]
 
