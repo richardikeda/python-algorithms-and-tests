@@ -1,5 +1,4 @@
 import math
-
 from PIL import Image
 
 def text_to_image(text):
@@ -44,21 +43,11 @@ def text_to_image(text):
     # Split the list of ASCII values into groups of 3 characters.
     pixels = img.load()
     for i in range(len(ascii_groups)):
-        try:
-            x = i % MAX_WIDTH
-            y = i // MAX_WIDTH
-            r = ascii_groups[i][0]  #mantain red
-            g = ascii_groups[i][1] << 8 #move to green
-            b = ascii_groups[i][2] << 16 #move to blue
-        except IndexError:
-            ascii_groups[i] += [255]
-            r = ascii_groups[i][0]  #mantain red
-            g = ascii_groups[i][1] << 8 #move to green
-            b = ascii_groups[i][2] << 16 #move to blue
-        pixels[x, y] = (r + g + b,)
+        x = i % MAX_WIDTH
+        y = i // MAX_WIDTH
+        pixels[x, y] = tuple(ascii_groups[i])
 
     # Saves the image as a PNG file
     filename='tests/img/text_image.png'
     img.save(filename, 'PNG')
     return filename
-
