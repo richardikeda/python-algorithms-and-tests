@@ -3,6 +3,7 @@ from PIL import Image
 from unittest import TestCase
 
 from algorithms.text_to_image import text_to_image
+from algorithms.image_to_text import image_to_text
 
 class TextToImageTestCase(TestCase):
 
@@ -35,22 +36,24 @@ class TextToImageFromTxtTestCase(TestCase):
         with open("tests/txt/test1.txt", "r") as f:
             text = f.read()
 
-        actual_filename =  text_to_image(text)
+        actual_filename = text_to_image(text)
 
-        
-        # select a rectangular region from the generated image
+        # verify that the image can be read back to the original text
+        read_text = image_to_text(actual_filename)
+
+        self.assertEqual(text, read_text)
+
+    def test_non_multiple_of_3(self):
+        # Ensures that text length not multiple of 3 doesn't crash and is padded properly
+        actual_filename = text_to_image("Hello") # 5 characters
         img = Image.open(actual_filename)
-        region = img.crop((0, 0, 10, 10))
-
-        # select a substring from the original text
-        substring = text[:10]
-
-        # convert the substring to an image for comparison
-        expected_region = text_to_image(substring)
-
-        # compare the two regions
-        self.assertEqual(region.tobytes(), expected_region.tobytes())
-        
+        pixels = img.load()
+        # "Hel" -> (72, 101, 108)
+        self.assertEqual(pixels[0, 0], (72, 101, 108))
+        # "lo" -> (108, 111, 255) padding with 255
+        self.assertEqual(pixels[1, 0], (108, 111, 255))
+        # End of message -> (255, 255, 255)
+        self.assertEqual(pixels[2, 0], (255, 255, 255))
 
 
 if __name__ == '__main__':
